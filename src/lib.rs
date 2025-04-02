@@ -6,7 +6,7 @@ mod keymap;
 pub mod menu_item;
 pub use crate::menu_item::MenuItem;
 mod theme;
-
+pub use crate::theme::Theme;
 
 #[cfg(target_os = "windows")]
 mod win_image_handler;
