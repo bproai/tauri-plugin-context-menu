@@ -51,5 +51,12 @@ impl MenuItem {
             ..Default::default()
         }
     }
+
+    // Add this method to support the with_id functionality
+    pub fn with_id(mut self, id: &str) -> Self {
+        // Store the ID in the event field, or create a new id field if needed
+        self.event = Some(id.to_string());
+        self
+    }
 }
 
