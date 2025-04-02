@@ -44,9 +44,9 @@ extern "C" fn menu_item_action<R: Runtime>(_self: &Object, _cmd: Sel, _item: id)
     "event": event_name,
         "payload": payload
     });
-    tauri::AppHandle::global()
-        .emit_all("context-menu-item-selected", json_payload)
-        .unwrap();
+    window.app_handle()
+    .emit_all("context-menu-item-selected", json_payload)
+    .unwrap();
 
 }
 
