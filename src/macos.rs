@@ -47,7 +47,7 @@ extern "C" fn menu_item_action<R: Runtime>(_self: &Object, _cmd: Sel, _item: id)
 
 extern "C" fn menu_did_close<R: Runtime>(_self: &Object, _cmd: Sel, _menu: id) {
     if let Some(window) = CURRENT_WINDOW.get_window::<R>() {
-        window.emit_to(window.label(), "menu-did-close", ()).unwrap();
+        window.emit("menu-did-close", ()).unwrap();
     } else {
         println!("Menu did close, but no window was found.");
     }
