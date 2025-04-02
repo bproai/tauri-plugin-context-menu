@@ -41,7 +41,8 @@ extern "C" fn menu_item_action<R: Runtime>(_self: &Object, _cmd: Sel, _item: id)
     let window = &*window_arc;
 
     // Emit the event on the window
-    window.emit_to(window.label(), &event_name, payload).unwrap();
+    window.emit(&event_name, payload).unwrap();
+
 }
 
 extern "C" fn menu_did_close<R: Runtime>(_self: &Object, _cmd: Sel, _menu: id) {
