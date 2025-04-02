@@ -44,7 +44,11 @@ fn show_context_menu<R: Runtime>(
     os::show_context_menu(window, pos, items, theme);
 }
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
-    Builder::new("context_menu")
+    Builder::new("context-menu")
+        .setup(|app| {
+            // Any plugin setup (optional)
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![show_context_menu])
         .build()
 }
