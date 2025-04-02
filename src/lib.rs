@@ -45,7 +45,7 @@ fn show_context_menu<R: Runtime>(
 }
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
     Builder::new("context-menu")
-        .setup(|app| {
+        .setup(|app, api| {
             // Any plugin setup (optional)
             Ok(())
         })
