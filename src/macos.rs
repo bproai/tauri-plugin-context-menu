@@ -12,7 +12,7 @@ use crate::macos_window_holder::CURRENT_WINDOW;
 use crate::theme::Theme;
 use crate::{MenuItem, Position};
 use serde_json;
-use tauri::Manager;
+use tauri::{Manager, AppHandle};
 
 use tauri::Emitter;
 
