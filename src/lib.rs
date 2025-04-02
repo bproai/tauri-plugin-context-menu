@@ -3,7 +3,8 @@ use tauri::{plugin::Builder, plugin::TauriPlugin, Runtime, Window};
 use once_cell::sync::OnceCell; 
 
 mod keymap;
-mod menu_item;
+pub mod menu_item;
+pub use crate::menu_item::MenuItem;
 mod theme;
 
 use menu_item::MenuItem;
