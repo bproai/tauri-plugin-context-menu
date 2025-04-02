@@ -33,7 +33,7 @@ pub struct Position {
     is_absolute: Option<bool>,
 }
 
-use tauri::{plugin::Builder, plugin::TauriPlugin, Runtime, State};
+use tauri::{State};
 use std::sync::Mutex;
 
 #[tauri::command]
