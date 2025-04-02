@@ -1,3 +1,8 @@
+// Change line 50 from:
+//     .emit_all("context-menu-item-selected", json_payload)
+// to:
+//     .emit("context-menu-item-selected", json_payload)
+
 use cocoa::appkit::{NSControl, NSMenuItem};
 use cocoa::base::{id, nil, selector};
 use cocoa::foundation::{NSPoint, NSRect, NSSize, NSString};
@@ -47,7 +52,7 @@ extern "C" fn menu_item_action<R: Runtime>(_self: &Object, _cmd: Sel, _item: id)
         "payload": payload
     });
     window.app_handle()
-    .emit_all("context-menu-item-selected", json_payload)
+    .emit("context-menu-item-selected", json_payload)
     .unwrap();
 
 }
