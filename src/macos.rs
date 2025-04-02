@@ -11,6 +11,7 @@ use crate::keymap::{get_key_map, get_modifier_map};
 use crate::macos_window_holder::CURRENT_WINDOW;
 use crate::theme::Theme;
 use crate::{MenuItem, Position};
+use serde_json;
 
 use tauri::Emitter;
 
