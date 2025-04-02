@@ -7,8 +7,6 @@ pub mod menu_item;
 pub use crate::menu_item::MenuItem;
 mod theme;
 
-use menu_item::MenuItem;
-use theme::Theme;
 
 #[cfg(target_os = "windows")]
 mod win_image_handler;
