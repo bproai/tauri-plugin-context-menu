@@ -35,3 +35,21 @@ impl Default for MenuItem {
         }
     }
 }
+
+// 👇 Add this block below your existing code
+impl MenuItem {
+    pub fn new(label: &str) -> Self {
+        Self {
+            label: Some(label.to_string()),
+            ..Default::default()
+        }
+    }
+
+    pub fn separator() -> Self {
+        Self {
+            is_separator: Some(true),
+            ..Default::default()
+        }
+    }
+}
+
