@@ -1,5 +1,6 @@
 use serde::Deserialize;
 use tauri::{plugin::Builder, plugin::TauriPlugin, Runtime, Window};
+use once_cell::sync::OnceCell; 
 
 mod keymap;
 mod menu_item;
