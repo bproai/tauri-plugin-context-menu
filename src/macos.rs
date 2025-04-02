@@ -12,6 +12,8 @@ use crate::macos_window_holder::CURRENT_WINDOW;
 use crate::theme::Theme;
 use crate::{MenuItem, Position};
 
+use tauri::Emitter;
+
 extern "C" {
     fn NSPointInRect(aPoint: NSPoint, aRect: NSRect) -> bool;
 }
