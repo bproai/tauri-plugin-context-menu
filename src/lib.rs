@@ -33,6 +33,9 @@ pub struct Position {
     is_absolute: Option<bool>,
 }
 
+use tauri::{plugin::Builder, plugin::TauriPlugin, Runtime, State};
+use std::sync::Mutex;
+
 #[tauri::command]
 fn show_context_menu<R: Runtime>(
     window: Window<R>,
@@ -41,8 +44,15 @@ fn show_context_menu<R: Runtime>(
     theme: Option<String>,
 ) {
     let theme = theme.and_then(|s| Theme::from_str(&s));
-    os::show_context_menu(window, pos, items, theme);
+
+    // Use provided items, or fallback to default
+    let menu_items = items.or_else(|| {
+        DEFAULT_MENU_ITEMS.get().map(|mutex| mutex.lock().unwrap().clone())
+    });
+
+    os::show_context_menu(window, pos, menu_items, theme);
 }
+
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
     Builder::new("context-menu")
         .setup(|app, api| {
@@ -52,3 +62,18 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
         .invoke_handler(tauri::generate_handler![show_context_menu])
         .build()
 }
+
+
+
+// Global fallback to store default items (used when `items` arg is None)
+static DEFAULT_MENU_ITEMS: OnceCell<Mutex<Vec<MenuItem>>> = OnceCell::new();
+
+pub fn init_with_menu<R: Runtime>(default_items: Vec<MenuItem>) -> TauriPlugin<R> {
+    DEFAULT_MENU_ITEMS.set(Mutex::new(default_items)).ok();
+
+    Builder::new("context-menu")
+        .setup(|_app, _api| Ok(()))
+        .invoke_handler(tauri::generate_handler![show_context_menu])
+        .build()
+}
+
