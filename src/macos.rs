@@ -41,12 +41,12 @@ extern "C" fn menu_item_action<R: Runtime>(_self: &Object, _cmd: Sel, _item: id)
     let window = &*window_arc;
 
     // Emit the event on the window
-    window.emit(&event_name, payload).unwrap();
+    window.emit_to(tauri::EventTarget::Window(&window.label()), &event_name, payload).unwrap();
 }
 
 extern "C" fn menu_did_close<R: Runtime>(_self: &Object, _cmd: Sel, _menu: id) {
     if let Some(window) = CURRENT_WINDOW.get_window::<R>() {
-        window.emit("menu-did-close", ()).unwrap();
+        window.emit_to(tauri::EventTarget::Window(&window.label()), "menu-did-close", ()).unwrap();
     } else {
         println!("Menu did close, but no window was found.");
     }
