@@ -40,8 +40,13 @@ extern "C" fn menu_item_action<R: Runtime>(_self: &Object, _cmd: Sel, _item: id)
     // Dereferencing the Arc to get a reference to the Window<R>
     let window = &*window_arc;
 
-    // Emit the event on the window
-    window.emit(&event_name, payload).unwrap();
+    let json_payload = serde_json::json!({
+    "event": event_name,
+        "payload": payload
+    });
+    tauri::AppHandle::global()
+        .emit_all("context-menu-item-selected", json_payload)
+        .unwrap();
 
 }
 
